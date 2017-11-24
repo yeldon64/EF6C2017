@@ -16,7 +16,7 @@ class Distrito(models.Model):
     nombre = models.CharField('Nombre del distrito', max_length=128)
     cantidad_votantes = models.IntegerField('Cantidad de votantes', default=0)
     latitude = models.DecimalField('Latitud', max_digits=14, decimal_places=10, default=0)
-    longitude = models.DecimalField('Latitud', max_digits=14, decimal_places=10, default=0)
+    longitude = models.DecimalField('Longitud', max_digits=14, decimal_places=10, default=0)
 
 
     def __str__(self):
@@ -36,5 +36,8 @@ class Votos(models.Model):
     #TODO Completar segun consideraciones del desarrollador
     En este comentario escribir por que se decide modelar de esta
     forma la clase
+
+    Es modelo se eligio porque cda voto tiene que tener la informacion del candidato elegido (o voto en blanco) y el distrito del votante
     """
-    pass
+    voto = models.CharField('Candidato votado', max_length=128, null = True)
+    distrito = models.ForeignKey(Distrito)
