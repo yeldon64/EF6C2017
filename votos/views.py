@@ -36,11 +36,10 @@ def resultado_global(request):
         print (a.distrito)
         print (a.voto)
 
-    for can in Candidato.objects.all():
-        for i in Votos.objects.all():
-            if i.voto == can.nombre:
-                can.votantes += 1
-                can.save()
+    #for can in Candidato.objects.all():
+    #    for i in Votos.objects.all():
+    #        if i.voto == can.nombre:
+
 
     context={}
     context['distritos'] = Distrito.objects.all()
