@@ -31,6 +31,9 @@ class Candidato(models.Model):
     El modelo de candidato debe contar con un nombre para el candidato
     """
     nombre = models.CharField('Nombre del candidato', max_length=128)
+    votantes = models.DecimalField('votos', max_digits = 100, decimal_places= 0, default= 0)
+    def __str__(self):
+        return 'Candidato {}'.format(self.nombre)
     
 
 
@@ -40,7 +43,9 @@ class Votos(models.Model):
     En este comentario escribir por que se decide modelar de esta
     forma la clase
 
-    Este modelo se eligio porque cda voto tiene que tener la informacion del candidato elegido (o voto en blanco) y el distrito del votante
+    Este modelo se eligio porque cada voto tiene que tener la informacion del candidato elegido (o voto en blanco) y el distrito del votante
     """
-    voto = models.ForeignKey(Candidato, null = True)
+    voto = models.ForeignKey(Candidato, blank=True)
     distrito = models.ForeignKey(Distrito)
+
+

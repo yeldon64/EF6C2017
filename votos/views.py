@@ -17,6 +17,8 @@ def resultado_global(request):
     Porcentaje de votos nulos
     Total de votos de la elección
     """
+
+     #TODO TU CODIGO AQUI
     padron = 0
     for i in Distrito.objects.all():
         padron = padron+i.cantidad_votantes
@@ -25,12 +27,28 @@ def resultado_global(request):
     for i in Votos.objects.all():
         cant_votos += 1
 
+    #cant_nulos = 0
+    #for i in Votos.objects.all():
+        #if i.voto == null:
+            #cant_nulos += 1
+    for a in Votos.objects.all():
+        print (a)
+        print (a.distrito)
+        print (a.voto)
+
+    for can in Candidato.objects.all():
+        for i in Votos.objects.all():
+            if i.voto == can.nombre:
+                can.votantes += 1
+                can.save()
+
     context={}
     context['distritos'] = Distrito.objects.all()
     context['padron'] = padron
-    context['porc_votantes'] = (cant_votos*100)/padron
+    context['porc_votantes'] = str((cant_votos*100)/padron) + "%"
     context['cant_votantes'] = (cant_votos)
-    #TODO TU CODIGO AQUI
+    #context['cant_votantes_b'] = (cant_nulos)
+   
 
     return render(request,'global.html',context)
 
@@ -44,6 +62,7 @@ def resultado_distrital(request):
     Total de votos del distrito
     Candidato ganador
     """
+    
     context={}
 
     #TODO TU CODIGO AQUI
