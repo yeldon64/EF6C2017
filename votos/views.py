@@ -17,8 +17,19 @@ def resultado_global(request):
     Porcentaje de votos nulos
     Total de votos de la elección
     """
+    padron = 0
+    for i in Distrito.objects.all():
+        padron = padron+i.cantidad_votantes
+
+    cant_votos = 0
+    for i in Votos.objects.all():
+        cant_votos += 1
+
     context={}
     context['distritos'] = Distrito.objects.all()
+    context['padron'] = padron
+    context['porc_votantes'] = (cant_votos*100)/padron
+    context['cant_votantes'] = (cant_votos)
     #TODO TU CODIGO AQUI
 
     return render(request,'global.html',context)

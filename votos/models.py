@@ -27,8 +27,11 @@ class Candidato(models.Model):
     #TODO Completar segun consideraciones del desarrollador
     En este comentario escribir por que se decide modelar de esta
     forma la clase
+    
+    El modelo de candidato debe contar con un nombre para el candidato
     """
-    pass
+    nombre = models.CharField('Nombre del candidato', max_length=128)
+    
 
 
 class Votos(models.Model):
@@ -37,7 +40,7 @@ class Votos(models.Model):
     En este comentario escribir por que se decide modelar de esta
     forma la clase
 
-    Es modelo se eligio porque cda voto tiene que tener la informacion del candidato elegido (o voto en blanco) y el distrito del votante
+    Este modelo se eligio porque cda voto tiene que tener la informacion del candidato elegido (o voto en blanco) y el distrito del votante
     """
-    voto = models.CharField('Candidato votado', max_length=128, null = True)
+    voto = models.ForeignKey(Candidato, null = True)
     distrito = models.ForeignKey(Distrito)
